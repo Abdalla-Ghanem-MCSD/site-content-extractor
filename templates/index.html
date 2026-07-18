@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Site Content Extractor</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="bg"></div>
+
+  <main class="wrap">
+    <header class="head">
+      <div class="logo">
+        <span class="dot"></span>
+        <h1>Site Content<span>Extractor</span></h1>
+      </div>
+      <p class="tag">Crawl every page &amp; sub-page of a website and export the content to Word, Markdown or JSON.</p>
+    </header>
+
+    <!-- INPUT CARD -->
+    <section class="card" id="inputCard">
+      <label class="field">
+        <span>Website URL</span>
+        <input type="text" id="url" placeholder="https://www.example.com" autocomplete="off" />
+      </label>
+
+      <div class="row">
+        <label class="field small">
+          <span>Max pages</span>
+          <input type="number" id="maxPages" value="100" min="1" max="2000" />
+        </label>
+        <label class="field small">
+          <span>Delay (sec)</span>
+          <input type="number" id="delay" value="0.3" min="0" max="5" step="0.1" />
+        </label>
+        <label class="field small toggle">
+          <span>Same domain only</span>
+          <input type="checkbox" id="sameDomain" checked />
+          <i class="switch"></i>
+        </label>
+      </div>
+
+      <div class="formats">
+        <label class="chip"><input type="checkbox" value="docx" checked /><span>Word .docx</span></label>
+        <label class="chip"><input type="checkbox" value="md" checked /><span>Markdown .md</span></label>
+        <label class="chip"><input type="checkbox" value="json" checked /><span>JSON .json</span></label>
+      </div>
+
+      <button id="startBtn" class="btn">
+        <span class="btn-label">Start Extracting</span>
+        <span class="btn-spinner"></span>
+      </button>
+    </section>
+
+    <!-- PROGRESS -->
+    <section class="card progress hidden" id="progressCard">
+      <div class="stats">
+        <div class="stat"><div class="num" id="sCrawled">0</div><div class="lbl">Crawled</div></div>
+        <div class="stat"><div class="num" id="sQueued">0</div><div class="lbl">Queued</div></div>
+        <div class="stat"><div class="num" id="sErrors">0</div><div class="lbl">Errors</div></div>
+      </div>
+
+      <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+
+      <div class="status" id="statusLine">
+        <span class="pulse"></span><span id="statusText">Working…</span>
+      </div>
+
+      <ul class="pagelist" id="pageList"></ul>
+
+      <button id="stopBtn" class="btn ghost">Stop</button>
+    </section>
+
+    <!-- DONE -->
+    <section class="card done hidden" id="doneCard">
+      <div class="check">✓</div>
+      <h2 id="doneTitle">Done!</h2>
+      <p id="doneSub"></p>
+      <div class="downloads" id="downloads"></div>
+      <button id="againBtn" class="btn ghost">Extract another site</button>
+    </section>
+
+    <footer class="foot">Runs locally on your machine · Flask + BeautifulSoup</footer>
+  </main>
+
+  <script>window.__BASE__ = "/xbase".replace(/\/xbase$/, "");</script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

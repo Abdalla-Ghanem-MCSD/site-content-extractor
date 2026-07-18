@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+# scraped output
+output/
+exports/
+*.docx
+*.md
+!README.md
+*.json
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
